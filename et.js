@@ -1,11 +1,13 @@
 "use strict";
 
+var _ = require("lodash");
+
 var aws = require("aws-sdk"),
     Promise = require("promise");
 
 module.exports = function(option) {
     var et = option === null ? new aws.ElasticTranscoder() : new aws.ElasticTranscoder(option);
-    return {
+    var extend = {
         CancelJobReq: function (jobId) {
             function doCancelETJobReq(ok, grr) {
                 var req = et.cancelJob({Id: jobId})
@@ -25,4 +27,6 @@ module.exports = function(option) {
             return new Promise(doCancelETJobReq);
         }
     };
+    _.assign(et, extend);
+    return et;
 };

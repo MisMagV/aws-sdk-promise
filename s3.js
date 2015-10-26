@@ -1,15 +1,13 @@
 "use strict";
 
+var _ = require("lodash");
+
 var aws = require("aws-sdk"),
     Promise = require("promise");
 
 module.exports = function(option) {
     var s3 = option === null ? new aws.S3() : new aws.S3(option);
-    return {
-        GetSignedUrl: function(domain, param) {
-            return s3.getSignedUrl(domain, param);
-        },
-
+    var extend = {
         CopyObject: function (param) {
             function doCopyObject(ok, grr) {
                 var cpReq = s3.copyObject(param)
@@ -59,4 +57,6 @@ module.exports = function(option) {
             return new Promise(doDeleteObjects);
         }
     };
+    _.assign(s3, extend);
+    return s3;
 };
