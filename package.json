@@ -1,0 +1,24 @@
+{
+  "name": "aws-sdk-promise",
+  "version": "0.0.1",
+  "description": "AWS sdk Promise wrapper for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffjen/aws-sdk-promise.git"
+  },
+  "author": "Jeffrey Jen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffjen/aws-sdk-promise/issues"
+  },
+  "homepage": "https://github.com/jeffjen/aws-sdk-promise#readme",
+  "dependencies": {
+    "aws-sdk": "^2.2.11",
+    "lodash": "^3.10.1",
+    "promise": "^7.0.4"
+  }
+}
