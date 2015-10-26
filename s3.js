@@ -6,6 +6,10 @@ var aws = require("aws-sdk"),
 module.exports = function(option) {
     var s3 = option === null ? new aws.S3() : new aws.S3(option);
     return {
+        GetSignedUrl: function(domain, param) {
+            return s3.getSignedUrl(domain, param);
+        },
+
         CopyObject: function (param) {
             function doCopyObject(ok, grr) {
                 var cpReq = s3.copyObject(param)
