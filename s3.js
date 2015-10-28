@@ -41,6 +41,21 @@ module.exports = function(option) {
             return new Promise(doGetObject);
         },
 
+        PutObject: function(param) {
+            function doPutObject(ok, grr) {
+                var putReq = s3.putObject(param)
+                    .on("success", function() {
+                        ok();
+                    })
+                    .on("error", function(err) {
+                        grr(err);
+                    });
+                setTimeout(putReq.abort.bind(putReq), 5 * 1000);
+                putReq.send();
+            }
+            return new Promise(doPutObject);
+        },
+
         DeleteObjects: function(param) {
             // best effort remove delete old video
             function doDeleteObjects(ok, grr) {
