@@ -45,7 +45,7 @@ module.exports = function(option) {
             function doPutObject(ok, grr) {
                 var putReq = s3.putObject(param)
                     .on("success", function() {
-                        ok();
+                        ok(param);
                     })
                     .on("error", function(err) {
                         grr(err);
