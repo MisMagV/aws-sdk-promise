@@ -12,7 +12,7 @@ module.exports = function(option) {
             function doCopyObject(ok, grr) {
                 var cpReq = s3.copyObject(param)
                     .on("success", function(data) {
-                        ok();
+                        ok(param);
                     })
                     .on("error", function(err) {
                         grr(err);
