@@ -22,7 +22,7 @@ module.exports = function(option) {
             return new Promise(doCopyObject);
         },
 
-        GetObject: function (param) {
+        GetObject: function(param, timeout) {
             function doGetObject(ok, grr) {
                 var getReq = s3.getObject(param)
                     .on("success", function(data) {
@@ -35,13 +35,15 @@ module.exports = function(option) {
                     .on("error", function(err) {
                         grr(err);
                     });
-                setTimeout(getReq.abort.bind(getReq), 5 * 1000);
+                if (timeout !== undefined) {
+                    setTimeout(getReq.abort.bind(getReq), timeout);
+                }
                 getReq.send();
             }
             return new Promise(doGetObject);
         },
 
-        PutObject: function(param) {
+        PutObject: function(param, timeout) {
             function doPutObject(ok, grr) {
                 var putReq = s3.putObject(param)
                     .on("success", function() {
@@ -50,7 +52,9 @@ module.exports = function(option) {
                     .on("error", function(err) {
                         grr(err);
                     });
-                setTimeout(putReq.abort.bind(putReq), 5 * 1000);
+                if (timeout !== undefined) {
+                    setTimeout(putReq.abort.bind(putReq), timeout);
+                }
                 putReq.send();
             }
             return new Promise(doPutObject);
