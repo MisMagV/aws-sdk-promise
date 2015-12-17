@@ -4,6 +4,7 @@ var _ = require("lodash");
 
 var aws = require("aws-sdk"),
     s3Promise = require("./s3"),
+    lambdaPromise = require("./lambda"),
     etPromise = require("./et");
 
 module.exports = function(options) {
@@ -22,6 +23,10 @@ module.exports = function(options) {
 
         S3: function(opts) {
             return s3Promise(makecfg(opts));
+        },
+
+        Lambda: function(opts) {
+            return lambdaPromise(makecfg(opts));
         },
 
         ElasticTranscoder: function(opts) {
