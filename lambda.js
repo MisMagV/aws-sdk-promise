@@ -5,7 +5,7 @@ var _ = require("lodash"),
 
 var debug = console.log;
 if (util.debuglog !== undefined) {
-    debug = util.debuglog("s3-promise");
+    debug = util.debuglog("lambda-promise");
 }
 
 var aws = require("aws-sdk"),
