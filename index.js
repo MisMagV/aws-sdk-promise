@@ -3,12 +3,13 @@
 var _ = require("lodash");
 
 var aws = require("aws-sdk"),
+    cognitoPromise = require("./cognito"),
     s3Promise = require("./s3"),
     lambdaPromise = require("./lambda"),
     etPromise = require("./et");
 
 module.exports = function(options) {
-    _.assign(aws.config, options);
+    _.assign(aws.config, options || {});
 
     function makecfg(opts) {
         if (opts !== undefined) {
@@ -20,6 +21,12 @@ module.exports = function(options) {
 
     return {
         config: aws.config,
+
+        Credentials: aws.Credentials,
+
+        Cognito: function(opts) {
+            return cognitoPromise(makecfg(opts));
+        },
 
         S3: function(opts) {
             return s3Promise(makecfg(opts));
